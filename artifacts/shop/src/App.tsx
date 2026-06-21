@@ -18,6 +18,7 @@ import AdminProducts from "@/pages/admin/AdminProducts";
 import AdminOrders from "@/pages/admin/AdminOrders";
 import AdminUsers from "@/pages/admin/AdminUsers";
 import AdminCategories from "@/pages/admin/AdminCategories";
+import AdminGuard from "@/components/AdminGuard";
 
 function Router() {
   return (
@@ -35,11 +36,11 @@ function Router() {
         <Route path="/search" component={SearchPage} />
         <Route path="/notifications" component={NotificationsPage} />
         <Route path="/wishlist" component={WishlistPage} />
-        <Route path="/admin" component={AdminDashboard} />
-        <Route path="/admin/products" component={AdminProducts} />
-        <Route path="/admin/orders" component={AdminOrders} />
-        <Route path="/admin/users" component={AdminUsers} />
-        <Route path="/admin/categories" component={AdminCategories} />
+        <Route path="/admin">{() => <AdminGuard><AdminDashboard /></AdminGuard>}</Route>
+        <Route path="/admin/products">{() => <AdminGuard><AdminProducts /></AdminGuard>}</Route>
+        <Route path="/admin/orders">{() => <AdminGuard><AdminOrders /></AdminGuard>}</Route>
+        <Route path="/admin/users">{() => <AdminGuard><AdminUsers /></AdminGuard>}</Route>
+        <Route path="/admin/categories">{() => <AdminGuard><AdminCategories /></AdminGuard>}</Route>
         <Route>
           <div className="flex flex-col items-center justify-center min-h-[60vh]">
             <h1 className="text-4xl font-bold mb-4">404</h1>

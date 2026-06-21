@@ -1,11 +1,12 @@
-import { Router } from "express";
+import { Router, type Request, type Response } from "express";
 import { db } from "@workspace/db";
 import { productsTable, ordersTable, usersTable } from "@workspace/db";
 import { count, sum } from "drizzle-orm";
+import { requireAdmin } from "../middlewares/auth";
 
 const router = Router();
 
-router.get("/admin/stats", async (_req, res) => {
+router.get("/admin/stats", requireAdmin, async (_req: Request, res: Response): Promise<void> => {
   try {
     const [productsCount] = await db.select({ count: count() }).from(productsTable);
     const [ordersCount] = await db.select({ count: count() }).from(ordersTable);

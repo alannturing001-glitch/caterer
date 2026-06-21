@@ -1,54 +1,57 @@
-import { Router } from "express";
+import { Router, type Request, type Response } from "express";
 import { db } from "@workspace/db";
 import { usersTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
-import * as crypto from "crypto";
+import bcrypt from "bcryptjs";
+import { requireAdmin, requireAuth } from "../middlewares/auth";
 
 const router = Router();
 
-function hashPassword(password: string): string {
-  return crypto.createHash("sha256").update(password).digest("hex");
-}
-
-router.get("/users", async (_req, res) => {
+router.get("/users", requireAdmin, async (_req: Request, res: Response): Promise<void> => {
   try {
     const users = await db.select({ id: usersTable.id, email: usersTable.email, role: usersTable.role, createdAt: usersTable.createdAt }).from(usersTable);
     res.json(users);
   } catch { res.status(500).json({ error: "Internal server error" }); }
 });
 
-router.get("/users/:id", async (req, res) => {
+router.get("/users/:id", requireAdmin, async (req: Request, res: Response): Promise<void> => {
   try {
-    const [user] = await db.select({ id: usersTable.id, email: usersTable.email, role: usersTable.role }).from(usersTable).where(eq(usersTable.id, parseInt(req.params.id)));
-    if (!user) return res.status(404).json({ error: "Not found" });
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    const [user] = await db.select({ id: usersTable.id, email: usersTable.email, role: usersTable.role }).from(usersTable).where(eq(usersTable.id, parseInt(id)));
+    if (!user) { res.status(404).json({ error: "Not found" }); return; }
     res.json(user);
   } catch { res.status(500).json({ error: "Internal server error" }); }
 });
 
-router.get("/users/email/:email", async (req, res) => {
+router.get("/users/email/:email", requireAuth, async (req: Request, res: Response): Promise<void> => {
   try {
-    const [user] = await db.select({ id: usersTable.id, email: usersTable.email, role: usersTable.role }).from(usersTable).where(eq(usersTable.email, req.params.email));
-    if (!user) return res.status(404).json({ error: "Not found" });
+    const email = Array.isArray(req.params.email) ? req.params.email[0] : req.params.email;
+    const [user] = await db.select({ id: usersTable.id, email: usersTable.email, role: usersTable.role }).from(usersTable).where(eq(usersTable.email, email));
+    if (!user) { res.status(404).json({ error: "Not found" }); return; }
     res.json(user);
   } catch { res.status(500).json({ error: "Internal server error" }); }
 });
 
-router.post("/register", async (req, res) => {
+router.post("/register", async (req: Request, res: Response): Promise<void> => {
   try {
-    const { email, password } = req.body;
-    if (!email || !password) return res.status(400).json({ error: "Email and password required" });
+    const { email, password } = req.body as { email: string; password: string };
+    if (!email || !password) { res.status(400).json({ error: "Email and password required" }); return; }
     const [existing] = await db.select().from(usersTable).where(eq(usersTable.email, email));
-    if (existing) return res.status(400).json({ error: "Email already exists" });
-    const [user] = await db.insert(usersTable).values({ email, password: hashPassword(password), role: "user" }).returning({ id: usersTable.id, email: usersTable.email, role: usersTable.role });
+    if (existing) { res.status(400).json({ error: "Email already exists" }); return; }
+    const hashed = await bcrypt.hash(password, 12);
+    const [user] = await db.insert(usersTable).values({ email, password: hashed, role: "user" }).returning({ id: usersTable.id, email: usersTable.email, role: usersTable.role });
     res.status(201).json({ user });
   } catch { res.status(500).json({ error: "Internal server error" }); }
 });
 
-router.post("/auth/login", async (req, res) => {
+router.post("/auth/login", async (req: Request, res: Response): Promise<void> => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.body as { email: string; password: string };
+    if (!email || !password) { res.status(400).json({ error: "Email and password required" }); return; }
     const [user] = await db.select().from(usersTable).where(eq(usersTable.email, email));
-    if (!user || user.password !== hashPassword(password)) return res.status(401).json({ error: "Invalid credentials" });
+    if (!user) { res.status(401).json({ error: "Invalid credentials" }); return; }
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) { res.status(401).json({ error: "Invalid credentials" }); return; }
     res.json({ user: { id: user.id, email: user.email, role: user.role } });
   } catch { res.status(500).json({ error: "Internal server error" }); }
 });
