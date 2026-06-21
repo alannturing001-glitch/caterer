@@ -13,7 +13,7 @@ router.get("/orders", requireAdmin, async (_req: Request, res: Response): Promis
   } catch { res.status(500).json({ error: "Internal server error" }); }
 });
 
-router.post("/orders", requireAuth, async (req: Request, res: Response): Promise<void> => {
+router.post("/orders", async (req: Request, res: Response): Promise<void> => {
   try {
     const [order] = await db.insert(ordersTable).values(req.body).returning();
     res.status(201).json(order);
