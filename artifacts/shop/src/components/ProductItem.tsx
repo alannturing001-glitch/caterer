@@ -1,0 +1,19 @@
+import React from "react";
+import { Link } from "wouter";
+import { sanitize } from "@/lib/sanitize";
+
+const ProductItem = ({ product, color }: { product: any; color: string }) => (
+  <div className="flex flex-col items-center gap-y-2">
+    <Link href={`/product/${product.slug}`}>
+      <img src={product.mainImage ? `/${product.mainImage}` : "/product_placeholder.jpg"} className="w-auto h-[300px]" alt={sanitize(product?.title) || "Product image"} />
+    </Link>
+    <Link href={`/product/${product.slug}`} className={color === "black" ? "text-xl text-black font-normal mt-2 uppercase" : "text-xl text-white font-normal mt-2 uppercase"}>
+      {sanitize(product.title)}
+    </Link>
+    <p className={color === "black" ? "text-lg text-black font-semibold" : "text-lg text-white font-semibold"}>${product.price}</p>
+    <Link href={`/product/${product?.slug}`} className="block flex justify-center items-center w-full uppercase bg-white px-0 py-2 text-base border border-black border-gray-300 font-bold text-blue-600 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2">
+      View product
+    </Link>
+  </div>
+);
+export default ProductItem
