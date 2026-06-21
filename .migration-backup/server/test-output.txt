@@ -1,4 +1,4 @@
-﻿node : node:internal/modules/cjs/loader:1404
+node : node:internal/modules/cjs/loader:1404
 At line:1 char:1
 + node server/tests/bulk-upload-smoketest.js 2>&1 | 
 Out-File -FilePath  ...
