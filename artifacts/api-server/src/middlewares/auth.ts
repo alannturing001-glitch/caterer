@@ -5,10 +5,10 @@ export interface AuthenticatedRequest extends Request {
   user?: { id: number; email: string; role: string };
 }
 
-const JWT_SECRET = process.env.SESSION_SECRET || process.env.JWT_SECRET;
+const JWT_SECRET = process.env.SESSION_SECRET || process.env.JWT_SECRET || (process.env.NODE_ENV !== "production" ? "dev-only-insecure-secret" : undefined);
 
 if (!JWT_SECRET) {
-  throw new Error("SESSION_SECRET or JWT_SECRET environment variable must be set");
+  throw new Error("SESSION_SECRET environment variable must be set in production");
 }
 
 export function signToken(payload: { id: number; email: string; role: string }): string {

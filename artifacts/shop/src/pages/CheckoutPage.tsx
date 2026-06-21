@@ -4,6 +4,7 @@ import { useProductStore } from "@/store/cartStore";
 import toast from "react-hot-toast";
 import { useLocation } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
+import apiClient from "@/lib/api";
 
 const CheckoutPage = () => {
   const { products, total, clearCart } = useProductStore();
@@ -15,11 +16,7 @@ const CheckoutPage = () => {
     e.preventDefault();
     if (products.length === 0) { toast.error("Your cart is empty"); return; }
     try {
-      const res = await fetch("/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, products, total }),
-      });
+      const res = await apiClient.post("/api/orders", { ...formData, products, total });
       if (res.ok) { clearCart(); toast.success("Order placed successfully!"); navigate("/"); }
       else toast.error("Failed to place order");
     } catch { toast.error("Something went wrong"); }

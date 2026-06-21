@@ -18,6 +18,8 @@ import AdminProducts from "@/pages/admin/AdminProducts";
 import AdminOrders from "@/pages/admin/AdminOrders";
 import AdminUsers from "@/pages/admin/AdminUsers";
 import AdminCategories from "@/pages/admin/AdminCategories";
+import AdminProductForm from "@/pages/admin/AdminProductForm";
+import AdminMerchant from "@/pages/admin/AdminMerchant";
 import AdminGuard from "@/components/AdminGuard";
 
 function Router() {
