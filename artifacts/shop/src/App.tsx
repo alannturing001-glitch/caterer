@@ -43,6 +43,9 @@ function Router() {
         <Route path="/admin/orders">{() => <AdminGuard><AdminOrders /></AdminGuard>}</Route>
         <Route path="/admin/users">{() => <AdminGuard><AdminUsers /></AdminGuard>}</Route>
         <Route path="/admin/categories">{() => <AdminGuard><AdminCategories /></AdminGuard>}</Route>
+        <Route path="/admin/products/new">{() => <AdminGuard><AdminProductForm /></AdminGuard>}</Route>
+        <Route path="/admin/products/:id/edit">{({ id }: any) => <AdminGuard><AdminProductForm params={{ id }} /></AdminGuard>}</Route>
+        <Route path="/admin/merchant">{() => <AdminGuard><AdminMerchant /></AdminGuard>}</Route>
         <Route>
           <div className="flex flex-col items-center justify-center min-h-[60vh]">
             <h1 className="text-4xl font-bold mb-4">404</h1>

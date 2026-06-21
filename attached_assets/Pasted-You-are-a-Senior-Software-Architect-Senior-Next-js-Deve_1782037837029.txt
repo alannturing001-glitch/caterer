@@ -1,0 +1,523 @@
+You are a Senior Software Architect, Senior Next.js Developer, Prisma Expert, and Product Designer.
+
+Your task is to transform an existing e-commerce platform into a Catering Marketplace and Quotation Management System while preserving as much of the existing architecture as possible.
+
+SOURCE PROJECT
+
+Repository:
+
+https://github.com/Kuzma02/Electronics-eCommerce-Shop-With-Admin-Dashboard-NextJS-NodeJS
+
+PROJECT GOAL
+
+Convert the electronics e-commerce application into a catering marketplace where:
+
+• Customers browse catering packages.
+• Customers customize packages.
+• Dynamic pricing is calculated in real time.
+• Customers request quotations.
+• Caterers review and approve quotations.
+• Customers confirm bookings.
+• Payments are collected through M-Pesa and other payment methods.
+
+IMPORTANT
+
+Do NOT rebuild the application from scratch.
+
+Perform a comprehensive system analysis and adopt the existing architecture wherever possible.
+
+The objective is to maximize code reuse while replacing only the business logic that is specific to e-commerce.
+
+PHASE 1 — REPOSITORY ANALYSIS
+
+First perform a complete audit of the repository.
+
+Identify:
+
+• Folder structure
+• Frontend architecture
+• Backend architecture
+• Database schema
+• Authentication flow
+• Dashboard structure
+• API routes
+• State management
+• UI component library
+• Existing entities
+• Existing workflows
+
+Produce:
+
+1. Current Architecture Diagram
+2. Current Database ERD
+3. Current User Flow
+4. Current Admin Flow
+5. Existing Features Inventory
+
+PHASE 2 — REUSE ANALYSIS
+
+Create a detailed table showing:
+
+Component Name
+
+Current Purpose
+
+Can Be Reused?
+
+Reuse Percentage
+
+Required Changes
+
+Migration Strategy
+
+Example:
+
+Authentication
+
+Current Purpose:
+Customer Login
+
+Reuse:
+95%
+
+Changes:
+Rename user roles and permissions.
+
+Migration Strategy:
+Keep existing implementation.
+
+Perform this analysis for:
+
+• Authentication
+• Dashboard
+• Users
+• Categories
+• Products
+• Orders
+• Search
+• Image Upload
+• Reviews
+• Notifications
+• API Layer
+• Database Models
+• Layout Components
+• Shared UI Components
+
+PHASE 3 — DOMAIN TRANSFORMATION
+
+Transform the e-commerce domain into a catering marketplace domain.
+
+Rename entities.
+
+OLD ENTITY → NEW ENTITY
+
+Product → Catering Package
+
+Category → Event Type
+
+Order → Quotation
+
+Order Status → Quotation Status
+
+Product Variant → Menu Option
+
+Customer → Customer
+
+Admin → Platform Administrator
+
+Add New Entity:
+
+Caterer
+
+Add New Entity:
+
+Booking
+
+Add New Entity:
+
+Menu Category
+
+Add New Entity:
+
+Additional Service
+
+Add New Entity:
+
+Quotation Revision
+
+Generate a complete domain model.
+
+PHASE 4 — NEW BUSINESS MODEL
+
+Remove the traditional e-commerce flow.
+
+REMOVE:
+
+Product Cart
+
+Product Checkout
+
+Inventory Quantity Logic
+
+Stock Management
+
+Shipping Workflow
+
+Replace with:
+
+Package Discovery
+
+Package Customization
+
+Dynamic Pricing Engine
+
+Quotation Requests
+
+Quotation Approval Workflow
+
+Booking Workflow
+
+Deposit Payments
+
+Generate a detailed workflow diagram.
+
+NEW CUSTOMER FLOW
+
+Customer Visits Website
+
+↓
+
+Browse Packages
+
+↓
+
+Select Package
+
+↓
+
+Customize Package
+
+↓
+
+Configure Event Details
+
+↓
+
+Select Menu
+
+↓
+
+Select Additional Services
+
+↓
+
+Live Price Calculation
+
+↓
+
+Submit Quotation Request
+
+↓
+
+Caterer Reviews Request
+
+↓
+
+Customer Receives Quote
+
+↓
+
+Accept Quote
+
+↓
+
+Pay Deposit
+
+↓
+
+Booking Confirmed
+
+↓
+
+Event Delivered
+
+PHASE 5 — NEW DATABASE DESIGN
+
+Generate a complete Prisma schema for:
+
+User
+
+Customer
+
+Caterer
+
+Package
+
+PackageCategory
+
+MenuCategory
+
+MenuItem
+
+AdditionalService
+
+Quotation
+
+QuotationItem
+
+QuotationRevision
+
+Booking
+
+Payment
+
+Review
+
+Notification
+
+EventType
+
+Include:
+
+Relationships
+
+Indexes
+
+Constraints
+
+Enums
+
+Status Types
+
+PHASE 6 — NEW ADMIN DASHBOARD
+
+Transform the existing admin dashboard.
+
+CURRENT DASHBOARD
+
+Products
+
+Categories
+
+Orders
+
+Customers
+
+Users
+
+NEW DASHBOARD
+
+Overview
+
+Caterers
+
+Packages
+
+Menu Items
+
+Event Types
+
+Quotation Requests
+
+Bookings
+
+Payments
+
+Customers
+
+Reviews
+
+Reports
+
+Settings
+
+Generate:
+
+Sidebar Structure
+
+Dashboard Layout
+
+Page Structure
+
+Navigation Hierarchy
+
+PHASE 7 — CATERER PORTAL
+
+Create a new Caterer Dashboard.
+
+Modules:
+
+Dashboard
+
+Packages
+
+Menu Management
+
+Quotation Requests
+
+Bookings
+
+Calendar
+
+Revenue
+
+Reviews
+
+Profile
+
+Generate:
+
+Navigation Structure
+
+Page Wireframes
+
+Feature Specifications
+
+PHASE 8 — CUSTOMER EXPERIENCE
+
+Design the following pages:
+
+Home Page
+
+Browse Packages Page
+
+Package Details Page
+
+Package Customization Page
+
+Quotation Review Page
+
+Customer Dashboard
+
+Quotation History
+
+Booking Management
+
+Profile Settings
+
+Generate:
+
+User Flows
+
+Wireframes
+
+Component Breakdown
+
+PHASE 9 — PACKAGE CUSTOMIZATION ENGINE
+
+This is the core feature.
+
+Design a dynamic quotation builder.
+
+Inputs:
+
+Event Type
+
+Guest Counts
+
+Adult Guests
+
+Children
+
+VIP Guests
+
+Menu Items
+
+Additional Services
+
+Location
+
+Event Duration
+
+Event Date
+
+Outputs:
+
+Food Cost
+
+Service Cost
+
+Equipment Cost
+
+Transport Cost
+
+Taxes
+
+Total Cost
+
+Generate:
+
+Frontend Architecture
+
+Backend Architecture
+
+API Design
+
+Database Structure
+
+Pricing Calculation Logic
+
+PHASE 10 — IMPLEMENTATION ROADMAP
+
+Produce a migration roadmap.
+
+Include:
+
+Step-by-step implementation sequence.
+
+Phase 1:
+Repository Cleanup
+
+Phase 2:
+Database Migration
+
+Phase 3:
+Package System
+
+Phase 4:
+Quotation System
+
+Phase 5:
+Booking System
+
+Phase 6:
+Payment Integration
+
+Phase 7:
+Testing
+
+Phase 8:
+Production Deployment
+
+For each phase provide:
+
+Objectives
+
+Files To Modify
+
+Files To Create
+
+Estimated Complexity
+
+Dependencies
+
+Risks
+
+Expected Outcome
+
+FINAL DELIVERABLES
+
+Generate:
+
+1. Repository Analysis Report
+2. Architecture Migration Plan
+3. New Database Design
+4. Complete Feature Specification
+5. Admin Dashboard Specification
+6. Caterer Dashboard Specification
+7. Customer Portal Specification
+8. API Design
+9. Prisma Schema
+10. Implementation Roadmap
+
+The goal is to produce a production-ready blueprint for converting the existing e-commerce platform into a scalable Catering Marketplace and Quotation Management System while maximizing reuse of the existing codebase.
