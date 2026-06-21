@@ -29,6 +29,8 @@ function Router() {
       <Switch>
         <Route path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
+        <Route path="/packages" component={ShopPage} />
+        <Route path="/packages/:slug*" component={({ params }: any) => <ShopPage params={{ slug: (params as any)["slug*"]?.split("/") }} />} />
         <Route path="/shop/:slug*" component={({ params }: any) => <ShopPage params={{ slug: (params as any)["slug*"]?.split("/") }} />} />
         <Route path="/product/:slug" component={({ params }: any) => <ProductPage params={params} />} />
         <Route path="/cart" component={CartPage} />

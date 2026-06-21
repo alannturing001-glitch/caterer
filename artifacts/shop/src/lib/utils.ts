@@ -5,30 +5,30 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const categoryMenuList = [
-  { id: 1, title: "Smart Phones", src: "/smart phone icon.png", href: "/shop/smart-phones" },
-  { id: 2, title: "Tablets", src: "/tablet icon.png", href: "/shop/tablets" },
-  { id: 3, title: "Mouses", src: "/mouse icon.png", href: "/shop/mouses" },
-  { id: 4, title: "Cameras", src: "/camera icon.png", href: "/shop/cameras" },
-  { id: 5, title: "Smart Watches", src: "/smart watch.png", href: "/shop/watches" },
-  { id: 6, title: "Laptops", src: "/laptop icon.png", href: "/shop/laptops" },
-  { id: 7, title: "PCs", src: "/pc icon.png", href: "/shop/computers" },
-  { id: 8, title: "Printers", src: "/printers icon.png", href: "/shop/printers" },
-  { id: 9, title: "Earbuds", src: "/ear buds icon.png", href: "/shop/earbuds" },
-  { id: 10, title: "Head Phones", src: "/headphone icon.png", href: "/shop/headphones" },
+export const eventTypeMenuList = [
+  { id: 1, title: "Weddings", emoji: "💍", href: "/packages/weddings" },
+  { id: 2, title: "Corporate Events", emoji: "🏢", href: "/packages/corporate" },
+  { id: 3, title: "Birthday Parties", emoji: "🎂", href: "/packages/birthdays" },
+  { id: 4, title: "Outdoor BBQ", emoji: "🍖", href: "/packages/bbq" },
+  { id: 5, title: "Cocktail Receptions", emoji: "🥂", href: "/packages/cocktail" },
+  { id: 6, title: "Baby Showers", emoji: "🍼", href: "/packages/baby-showers" },
+  { id: 7, title: "Gala Dinners", emoji: "🍽️", href: "/packages/gala" },
+  { id: 8, title: "Graduation", emoji: "🎓", href: "/packages/graduation" },
+  { id: 9, title: "Religious Events", emoji: "🕊️", href: "/packages/religious" },
+  { id: 10, title: "Team Building", emoji: "🤝", href: "/packages/team-building" },
 ];
 
 export const incentives = [
-  { name: "Free Shipping", description: "Our shipping is completely free.", imageSrc: "/shipping icon.png" },
-  { name: "24/7 Customer Support", description: "Our support is working all day and night.", imageSrc: "/support icon.png" },
-  { name: "Fast Shopping Cart", description: "Super fast shopping experience.", imageSrc: "/fast shopping icon.png" },
+  { name: "Dedicated Event Planner", description: "A personal planner guides you from quotation to the last dish served.", imageSrc: "/support icon.png" },
+  { name: "Transparent Pricing", description: "No hidden fees. All costs calculated live before you submit a request.", imageSrc: "/shipping icon.png" },
+  { name: "Verified Caterers", description: "Every caterer on our platform is vetted, licensed, and reviewed.", imageSrc: "/fast shopping icon.png" },
 ];
 
 export const navigation = {
-  sale: [{ name: "Discounts", href: "#" }, { name: "News", href: "#" }, { name: "Register Discounts", href: "#" }],
-  about: [{ name: "About Singitronic", href: "#" }, { name: "Work With Us", href: "#" }, { name: "Company Profile", href: "#" }],
-  buy: [{ name: "Singitronic Loyalty Card", href: "#" }, { name: "Terms Of Use", href: "#" }, { name: "Privacy Policy", href: "#" }],
-  help: [{ name: "Contact", href: "#" }, { name: "How to Buy at Singitronic", href: "#" }, { name: "FAQ", href: "#" }],
+  packages: [{ name: "Browse All Packages", href: "/packages" }, { name: "Wedding Packages", href: "/packages/weddings" }, { name: "Corporate Packages", href: "/packages/corporate" }],
+  about: [{ name: "About Us", href: "#" }, { name: "Work With Us", href: "#" }, { name: "Become a Caterer", href: "#" }],
+  customers: [{ name: "How It Works", href: "#" }, { name: "Request a Quote", href: "/packages" }, { name: "Track My Quotation", href: "/my-quotations" }],
+  help: [{ name: "Contact", href: "#" }, { name: "FAQ", href: "#" }, { name: "Privacy Policy", href: "#" }],
 };
 
 export const isValidEmailAddressFormat = (input: string) => /^\S+@\S+\.\S+$/.test(input);
@@ -45,4 +45,3 @@ export const isValidCardNumber = (input: string) => {
 };
 export const isValidCreditCardExpirationDate = (input: string) => /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/.test(input);
 export const isValidCreditCardCVVOrCVC = (input: string) => /^[0-9]{3,4}$/.test(input);
-

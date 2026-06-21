@@ -5,13 +5,13 @@ import { useAuth } from "@/hooks/useAuth";
 import toast from "react-hot-toast";
 const HeaderTop = () => {
   const { user, logout } = useAuth();
-  const handleLogout = () => { logout(); toast.success("Logout successful!"); };
+  const handleLogout = () => { logout(); toast.success("Logged out successfully!"); };
   return (
-    <div className="h-10 text-white bg-blue-500 max-lg:px-5 max-lg:h-16 max-[573px]:px-0">
+    <div className="h-10 text-white bg-blue-700 max-lg:px-5 max-lg:h-16 max-[573px]:px-0">
       <div className="flex justify-between h-full max-lg:flex-col max-lg:justify-center max-lg:items-center max-w-screen-2xl mx-auto px-12 max-[573px]:px-0">
         <ul className="flex items-center h-full gap-x-5 max-[370px]:text-sm max-[370px]:gap-x-2">
-          <li className="flex items-center gap-x-2 font-semibold"><FaHeadphones className="text-white" /><span>+381 61 123 321</span></li>
-          <li className="flex items-center gap-x-2 font-semibold"><FaRegEnvelope className="text-white text-xl" /><span>test@email.com</span></li>
+          <li className="flex items-center gap-x-2 font-semibold"><FaHeadphones className="text-white" /><span>+1 (800) CATERING</span></li>
+          <li className="flex items-center gap-x-2 font-semibold"><FaRegEnvelope className="text-white text-xl" /><span>hello@catermarket.com</span></li>
         </ul>
         <ul className="flex items-center gap-x-5 h-full max-[370px]:text-sm max-[370px]:gap-x-2 font-semibold">
           {!user ? (
@@ -21,7 +21,7 @@ const HeaderTop = () => {
             </>
           ) : (
             <>
-              <span className="ml-10 text-base">{user.email}</span>
+              <span className="text-sm text-white/90">{user.email}</span>
               <li><button onClick={handleLogout} className="flex items-center gap-x-2 font-semibold"><FaRegUser className="text-white" /><span>Log out</span></button></li>
             </>
           )}
@@ -30,4 +30,4 @@ const HeaderTop = () => {
     </div>
   );
 };
-export default HeaderTop
+export default HeaderTop;

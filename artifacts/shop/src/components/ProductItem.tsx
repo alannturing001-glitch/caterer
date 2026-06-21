@@ -5,15 +5,19 @@ import { sanitize } from "@/lib/sanitize";
 const ProductItem = ({ product, color }: { product: any; color: string }) => (
   <div className="flex flex-col items-center gap-y-2">
     <Link href={`/product/${product.slug}`}>
-      <img src={product.mainImage ? `/${product.mainImage}` : "/product_placeholder.jpg"} className="w-auto h-[300px]" alt={sanitize(product?.title) || "Product image"} />
+      <img src={product.mainImage ? `/${product.mainImage}` : "/product_placeholder.jpg"} className="w-auto h-[200px] object-cover rounded-xl" alt={sanitize(product?.title) || "Package image"} />
     </Link>
-    <Link href={`/product/${product.slug}`} className={color === "black" ? "text-xl text-black font-normal mt-2 uppercase" : "text-xl text-white font-normal mt-2 uppercase"}>
+    <Link href={`/product/${product.slug}`} className={color === "black" ? "text-base text-black font-bold mt-2 uppercase" : "text-base text-white font-bold mt-2 uppercase"}>
       {sanitize(product.title)}
     </Link>
-    <p className={color === "black" ? "text-lg text-black font-semibold" : "text-lg text-white font-semibold"}>${product.price}</p>
-    <Link href={`/product/${product?.slug}`} className="block flex justify-center items-center w-full uppercase bg-white px-0 py-2 text-base border border-black border-gray-300 font-bold text-blue-600 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2">
-      View product
+    {product.pricePerPerson ? (
+      <p className={color === "black" ? "text-sm text-gray-600" : "text-sm text-white/80"}>From ${product.pricePerPerson}/person</p>
+    ) : (
+      <p className={color === "black" ? "text-base text-black font-semibold" : "text-base text-white font-semibold"}>${product.price}</p>
+    )}
+    <Link href={`/product/${product?.slug}`} className="block w-full text-center uppercase bg-yellow-400 text-blue-900 py-2 text-sm font-bold hover:bg-yellow-300 transition-colors">
+      Request Quote
     </Link>
   </div>
 );
-export default ProductItem
+export default ProductItem;

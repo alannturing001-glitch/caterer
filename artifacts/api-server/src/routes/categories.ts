@@ -15,9 +15,9 @@ router.get("/categories", async (_req: Request, res: Response): Promise<void> =>
 
 router.post("/categories", requireAdmin, async (req: Request, res: Response): Promise<void> => {
   try {
-    const { name } = req.body as { name: string };
+    const { name, icon } = req.body as { name: string; icon?: string };
     const slug = name.toLowerCase().replace(/\s+/g, "-");
-    const [cat] = await db.insert(categoriesTable).values({ name, slug }).returning();
+    const [cat] = await db.insert(categoriesTable).values({ name, slug, icon: icon || "🍽️" }).returning();
     res.status(201).json(cat);
   } catch { res.status(500).json({ error: "Internal server error" }); }
 });

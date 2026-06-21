@@ -3,7 +3,7 @@ import PackageItem from "./PackageItem";
 import Heading from "./Heading";
 import apiClient from "@/lib/api";
 
-const ProductsSection = () => {
+const PackagesSection = () => {
   const [packages, setPackages] = useState<any[]>([]);
   useEffect(() => {
     apiClient.get("/api/products").then(r => r.json()).then(d => setPackages(Array.isArray(d) ? d.slice(0, 8) : [])).catch(() => setPackages([]));
@@ -16,7 +16,7 @@ const ProductsSection = () => {
           {packages.length > 0 ? packages.map((p: any) => <PackageItem key={p.id} pkg={p} color="white" />) : (
             <div className="col-span-full text-center text-white py-10">
               <p className="text-xl mb-2">No packages yet.</p>
-              <p className="text-white/70">Add packages from the admin panel.</p>
+              <p className="text-white/70">Seed the database or add packages from the admin panel.</p>
             </div>
           )}
         </div>
@@ -24,4 +24,4 @@ const ProductsSection = () => {
     </div>
   );
 };
-export default ProductsSection;
+export default PackagesSection;

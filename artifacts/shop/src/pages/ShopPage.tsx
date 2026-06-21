@@ -16,8 +16,11 @@ const ShopPage = ({ params }: { params?: { slug?: string[] } }) => {
 
   return (
     <main>
-      <SectionTitle title="SHOP" path="Home / Shop" />
+      <SectionTitle title="BROWSE PACKAGES" path="Home / Packages" />
       <div className="max-w-screen-2xl mx-auto px-8 pb-20 mt-10 max-sm:px-5">
+        <div className="mb-6">
+          <p className="text-gray-500">Discover our premium catering packages for every event and occasion</p>
+        </div>
         <Breadcrumb />
         <div className="flex gap-x-10 max-lg:flex-col">
           <div className="w-64 flex-shrink-0 max-lg:w-full">
@@ -35,4 +38,4 @@ const ShopPage = ({ params }: { params?: { slug?: string[] } }) => {
     </main>
   );
 };
-export default ShopPage
+export default ShopPage;
