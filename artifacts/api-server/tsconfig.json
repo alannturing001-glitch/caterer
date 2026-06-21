@@ -5,7 +5,16 @@
     "tsBuildInfoFile": ".tsbuildinfo",
     "outDir": "dist",
     "rootDir": "src",
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@features/*": ["./src/features/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@shared/types": ["./src/shared/types"],
+      "@shared/utils": ["./src/shared/utils"],
+      "@shared/validators": ["./src/shared/validators"],
+      "@shared/constants": ["./src/shared/constants"],
+      "@middlewares/*": ["./src/middlewares/*"]
+    }
   },
   "include": ["src"],
   "references": [

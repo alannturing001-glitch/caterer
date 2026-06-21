@@ -1,22 +1,29 @@
 import { Router, type IRouter } from "express";
 import healthRouter from "./health";
-import productsRouter from "./products";
-import categoriesRouter from "./categories";
-import usersRouter from "./users";
-import ordersRouter from "./orders";
 import adminRouter from "./admin";
-import menuItemsRouter from "./menuItems";
-import additionalServicesRouter from "./additionalServices";
+
+// Import refactored feature-based routers
+import { createPackagesRouter } from "@features/packages";
+import { createEventTypesRouter } from "@features/event-types";
+import { createMenuItemsRouter } from "@features/menu-items";
+import { createAdditionalServicesRouter } from "@features/additional-services";
+import { createUsersRouter } from "@features/users";
+import { createQuotationsRouter } from "@features/quotations";
 
 const router: IRouter = Router();
 
+// Health check (keep as-is)
 router.use(healthRouter);
-router.use(productsRouter);
-router.use(categoriesRouter);
-router.use(usersRouter);
-router.use(ordersRouter);
+
+// Admin dashboard
 router.use(adminRouter);
-router.use(menuItemsRouter);
-router.use(additionalServicesRouter);
+
+// Feature-based routers
+router.use(createPackagesRouter());
+router.use(createEventTypesRouter());
+router.use(createMenuItemsRouter());
+router.use(createAdditionalServicesRouter());
+router.use(createUsersRouter());
+router.use(createQuotationsRouter());
 
 export default router;
