@@ -1,19 +1,30 @@
-import React from 'react'
-const Newsletter = () => (
-  <div className="bg-white py-5 sm:py-24 lg:py-20">
-    <div className="mx-auto grid justify-items-center max-w-screen-2xl grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:gap-8 lg:px-8">
-      <div className="max-w-xl text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:col-span-7">
-        <h2 className="inline sm:block lg:inline xl:block max-sm:text-xl">Want product news and updates?</h2>{' '}
-        <p className="inline sm:block lg:inline xl:block max-sm:text-xl">Sign up for our newsletter.</p>
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+
+const Newsletter = () => {
+  const [email, setEmail] = useState("");
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) { toast.success("Thanks! We'll be in touch."); setEmail(""); }
+  };
+  return (
+    <div className="py-16 bg-amber-50 border-y border-amber-100">
+      <div className="max-w-xl mx-auto px-8 text-center">
+        <p className="text-amber-600 font-semibold text-sm uppercase tracking-wider mb-2">Stay Updated</p>
+        <h2 className="text-3xl font-bold text-gray-900 mb-3">Get Catering Inspiration</h2>
+        <p className="text-gray-500 text-sm mb-6">New packages, seasonal menus, and exclusive offers delivered to your inbox.</p>
+        <form onSubmit={handleSubmit} className="flex gap-x-2 max-sm:flex-col max-sm:gap-y-2">
+          <input
+            type="email" value={email} onChange={e => setEmail(e.target.value)}
+            placeholder="Your email address"
+            className="flex-1 border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+          />
+          <button type="submit" className="bg-green-800 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors whitespace-nowrap">
+            Subscribe
+          </button>
+        </form>
       </div>
-      <form className="w-full max-w-md lg:col-span-5 lg:pt-2">
-        <div className="flex gap-x-4">
-          <input id="email-address" name="email" type="email" required className="min-w-0 flex-auto rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" placeholder="Enter your email" />
-          <button type="submit" className="flex-none rounded-md bg-blue-500 text-white px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-blue-600">Subscribe</button>
-        </div>
-        <p className="mt-4 text-sm leading-6 text-gray-900">We care about your data. Read our <a href="#" className="font-semibold text-black">privacy policy</a>.</p>
-      </form>
     </div>
-  </div>
-)
-export default Newsletter
+  );
+};
+export default Newsletter;

@@ -11,10 +11,18 @@ const SearchInput = () => {
     setSearchInput("");
   };
   return (
-    <form className="flex w-full justify-center" onSubmit={searchProducts}>
-      <input type="text" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} placeholder="Type here" className="bg-gray-50 input input-bordered w-[70%] rounded-r-none outline-none focus:outline-none max-sm:w-full border border-gray-300 px-4 py-2" />
-      <button type="submit" className="btn bg-blue-500 text-white rounded-l-none rounded-r-xl hover:bg-blue-600 px-4 py-2">Search</button>
+    <form className="flex w-full" onSubmit={searchProducts}>
+      <input
+        type="text"
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+        placeholder="Search packages..."
+        className="bg-green-800/60 placeholder-green-400 text-white text-sm w-full rounded-l-lg px-3 py-2 outline-none focus:bg-green-800/80 border border-green-700/50 focus:border-green-500 transition-colors"
+      />
+      <button type="submit" className="bg-amber-500 hover:bg-amber-400 text-white text-sm font-semibold px-3 py-2 rounded-r-lg transition-colors whitespace-nowrap">
+        Search
+      </button>
     </form>
   );
 };
-export default SearchInput
+export default SearchInput;

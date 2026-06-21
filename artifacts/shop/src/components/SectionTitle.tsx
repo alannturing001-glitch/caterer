@@ -1,8 +1,8 @@
-import React from 'react'
-const SectionTitle = ({title, path}: {title: string; path: string}) => (
-  <div className='h-[250px] border-b pt-16 border-white bg-blue-500 mb-2 max-sm:h-[200px] max-sm:pt-16'>
-    <h1 className='text-7xl text-center mb-7 max-md:text-7xl max-sm:text-5xl text-white max-sm:mb-2'>{title}</h1>
-    <p className='text-xl text-center max-sm:text-xl text-white'>{path}</p>
+import React from "react";
+const SectionTitle = ({ title, path }: { title: string; path: string }) => (
+  <div className="h-[200px] bg-green-900 flex flex-col items-center justify-center max-sm:h-[160px]">
+    <h1 className="text-5xl font-bold text-white text-center max-sm:text-3xl">{title}</h1>
+    <p className="text-green-300 text-sm mt-3 text-center">{path}</p>
   </div>
-)
-export default SectionTitle
+);
+export default SectionTitle;

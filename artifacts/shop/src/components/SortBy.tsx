@@ -3,16 +3,17 @@ import { useSortStore } from "@/store/sortStore";
 const SortBy = () => {
   const { sortBy, changeSortBy } = useSortStore();
   return (
-    <div className="flex items-center gap-x-5 max-lg:flex-col max-lg:w-full max-lg:items-start">
-      <h3 className="text-xl">Sort by:</h3>
-      <select defaultValue={sortBy} onChange={(e) => changeSortBy(e.target.value)} className="select border-gray-400 py-2 px-2 text-base border-2 w-40 focus:outline-none outline-none max-lg:w-full bg-white">
-        <option value="defaultSort">Default</option>
-        <option value="titleAsc">Sort A-Z</option>
-        <option value="titleDesc">Sort Z-A</option>
+    <div className="flex items-center gap-x-3">
+      <span className="text-sm font-medium text-gray-600">Sort:</span>
+      <select value={sortBy} onChange={(e) => changeSortBy(e.target.value)}
+        className="border border-gray-200 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-600 bg-white text-gray-700 cursor-pointer">
+        <option value="defaultSort">Most Popular</option>
+        <option value="titleAsc">Name A–Z</option>
+        <option value="titleDesc">Name Z–A</option>
         <option value="lowPrice">Lowest Price</option>
         <option value="highPrice">Highest Price</option>
       </select>
     </div>
   );
 };
-export default SortBy
+export default SortBy;
