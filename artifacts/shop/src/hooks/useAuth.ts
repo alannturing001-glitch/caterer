@@ -6,11 +6,19 @@ type User = {
   role?: string;
 } | null;
 
+const SESSION_KEY = 'auth-token';
+
 let globalUser: User = null;
+let globalToken: string | null = null;
 const listeners: Array<(user: User) => void> = [];
 
-export function setUser(user: User) {
+export function getStoredToken(): string | null {
+  return globalToken;
+}
+
+export function setUser(user: User, token?: string) {
   globalUser = user;
+  globalToken = token ?? null;
   listeners.forEach((l) => l(user));
 }
 
@@ -20,16 +28,25 @@ export function useAuth() {
   useEffect(() => {
     const handler = (u: User) => setLocalUser(u);
     listeners.push(handler);
-    // Try to restore session from localStorage
-    const stored = localStorage.getItem('auth-session');
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        if (parsed && parsed.user) {
-          globalUser = parsed.user;
-          setLocalUser(parsed.user);
-        }
-      } catch {}
+    if (!globalUser) {
+      const storedToken = localStorage.getItem(SESSION_KEY);
+      if (storedToken) {
+        try {
+          const parts = storedToken.split('.');
+          if (parts.length === 3) {
+            const payload = JSON.parse(atob(parts[1]));
+            if (payload && payload.id && payload.email && payload.role && payload.exp) {
+              if (payload.exp * 1000 > Date.now()) {
+                globalUser = { id: payload.id, email: payload.email, role: payload.role };
+                globalToken = storedToken;
+                setLocalUser(globalUser);
+              } else {
+                localStorage.removeItem(SESSION_KEY);
+              }
+            }
+          }
+        } catch {}
+      }
     }
     return () => {
       const idx = listeners.indexOf(handler);
@@ -45,15 +62,20 @@ export function useAuth() {
     });
     if (res.ok) {
       const data = await res.json();
-      localStorage.setItem('auth-session', JSON.stringify(data));
-      setUser(data.user);
+      const token: string = data.token;
+      localStorage.setItem(SESSION_KEY, token);
+      const parts = token.split('.');
+      const payload = JSON.parse(atob(parts[1]));
+      const user = { id: String(payload.id), email: payload.email, role: payload.role };
+      setUser(user, token);
       return { ok: true };
     }
-    return { ok: false, error: 'Invalid credentials' };
+    const err = await res.json().catch(() => ({}));
+    return { ok: false, error: err.error || 'Invalid credentials' };
   };
 
   const logout = () => {
-    localStorage.removeItem('auth-session');
+    localStorage.removeItem(SESSION_KEY);
     setUser(null);
   };
 

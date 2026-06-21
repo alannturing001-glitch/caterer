@@ -3,7 +3,7 @@ import { db } from "@workspace/db";
 import { usersTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
 import bcrypt from "bcryptjs";
-import { requireAdmin, requireAuth } from "../middlewares/auth";
+import { requireAdmin, requireAuth, signToken } from "../middlewares/auth";
 
 const router = Router();
 
@@ -52,7 +52,8 @@ router.post("/auth/login", async (req: Request, res: Response): Promise<void> =>
     if (!user) { res.status(401).json({ error: "Invalid credentials" }); return; }
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) { res.status(401).json({ error: "Invalid credentials" }); return; }
-    res.json({ user: { id: user.id, email: user.email, role: user.role } });
+    const token = signToken({ id: user.id, email: user.email, role: user.role });
+    res.json({ token });
   } catch { res.status(500).json({ error: "Internal server error" }); }
 });
 
