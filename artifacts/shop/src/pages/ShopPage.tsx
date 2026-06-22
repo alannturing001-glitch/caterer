@@ -5,11 +5,8 @@ import Filters from "@/components/Filters";
 import SortBy from "@/components/SortBy";
 import Products from "@/components/Products";
 import Pagination from "@/components/Pagination";
-import { useLocation } from "wouter";
-
 const ShopPage = ({ params }: { params?: { slug?: string[] } }) => {
-  const [location] = useLocation();
-  const queryString = location.split('?')[1] || '';
+  const queryString = typeof window !== "undefined" ? window.location.search.slice(1) : "";
   const searchParams: Record<string, string> = {};
   new URLSearchParams(queryString).forEach((v, k) => { searchParams[k] = v; });
   const slug = params?.slug?.join('/');

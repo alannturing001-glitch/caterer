@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UserService, type PublicUser } from "./service";
+import { AuthenticatedRequest } from "@middlewares/auth";
 
 /**
  * UserController handles HTTP request/response for users
@@ -60,6 +61,12 @@ export class UserController {
 
       if (!email) {
         res.status(400).json({ error: "Email is required" });
+        return;
+      }
+
+      const caller = (req as AuthenticatedRequest).user;
+      if (!caller || (caller.email !== email && caller.role !== "admin")) {
+        res.status(403).json({ error: "Forbidden" });
         return;
       }
 
