@@ -80,10 +80,10 @@ export class MenuItemController {
    */
   async create(req: Request, res: Response): Promise<void> {
     try {
-      const { name, packageId } = req.body;
+      const { name } = req.body;
 
-      if (!name || !packageId) {
-        res.status(400).json({ error: "Name and packageId are required" });
+      if (!name) {
+        res.status(400).json({ error: "Name is required" });
         return;
       }
 

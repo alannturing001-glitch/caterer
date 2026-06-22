@@ -1,0 +1,2 @@
+- [Caterer Dashboard Schema](caterer-dashboard-schema.md) — menuItemsTable and productsTable extended with catering fields; always push with drizzle-kit after schema changes
+- [Admin Auth Pattern](admin-auth.md) — AdminGuard redirects to login; test admin requires DB role update to 'admin' after register (register defaults to 'user')

@@ -17,6 +17,15 @@ export const productsTable = pgTable("products", {
   description: text("description"),
   manufacturer: text("manufacturer"),
   category: text("category"),
+  // Package builder extensions
+  pricingModel: text("pricing_model").default("dynamic"),
+  serviceFee: doublePrecision("service_fee").default(0),
+  deliveryFee: doublePrecision("delivery_fee").default(0),
+  packageSections: jsonb("package_sections").default([]),
+  customizationRules: jsonb("customization_rules").default({}),
+  availableLocations: text("available_locations"),
+  bookingNotice: text("booking_notice"),
+  maxEventsPerDay: integer("max_events_per_day").default(5),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -66,9 +75,21 @@ export const menuItemsTable = pgTable("menu_items", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
   description: text("description"),
-  pricePerPerson: doublePrecision("price_per_person").notNull().default(0),
   category: text("category"),
   packageId: integer("package_id").references(() => productsTable.id),
+  // Pricing
+  pricePerPerson: doublePrecision("price_per_person").notNull().default(0),
+  baseCost: doublePrecision("base_cost").default(0),
+  sellingPrice: doublePrecision("selling_price").default(0),
+  // Availability & details
+  available: integer("available").default(1),
+  preparationTime: text("preparation_time"),
+  servingSize: text("serving_size"),
+  minimumQuantity: integer("minimum_quantity").default(1),
+  // Dietary flags as jsonb array of strings
+  dietary: jsonb("dietary").default([]),
+  // Images as jsonb array of strings
+  images: jsonb("images").default([]),
   createdAt: timestamp("created_at").defaultNow(),
 });
 

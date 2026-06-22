@@ -1,0 +1,239 @@
+1. Add Menu Item Page
+
+This is where a caterer creates reusable food items.
+
+Examples:
+
+Beef Stew
+Pilau Rice
+Chapati
+Fruit Salad
+Soda
+Fresh Juice
+
+These items will later be used inside packages.
+
+Add Menu Item Form
+Basic Information
+Item Name *
+Category *
+Description *
+
+Categories:
+
+Main Dish
+Side Dish
+Salad
+Dessert
+Drink
+Snack
+Pricing
+Base Cost
+Selling Price
+Cost Per Guest
+
+Example:
+
+Beef Stew
+
+Cost Per Guest:
+KES 120
+Availability
+✓ Available
+
+Preparation Time
+Serving Size
+Minimum Quantity
+Dietary Information
+☐ Vegetarian
+☐ Vegan
+☐ Halal
+☐ Gluten Free
+☐ Dairy Free
+Images
+Upload Photos
+
+Food gallery
+
+Save Actions
+Save Draft
+
+Publish Item
+2. Create Package Page
+
+This is where caterers build customizable packages.
+
+Page Header
+Create Catering Package
+Package Information
+Package Name *
+
+Package Description *
+
+Package Category *
+
+Categories:
+
+Wedding
+Corporate
+Birthday
+Funeral
+Thanksgiving
+Church Event
+Graduation
+Conference
+Package Image
+Upload Cover Image
+Pricing Model
+
+This is very important.
+
+○ Fixed Price
+
+○ Price Per Guest
+
+○ Dynamic Pricing
+
+For your system:
+
+✓ Dynamic Pricing
+Guest Requirements
+Minimum Guests
+
+Maximum Guests
+
+Example:
+
+30 - 500 Guests
+Package Builder
+
+This is the most important section.
+
+Main Dishes
+Required: 2
+
+Available Items:
+
+☑ Beef Stew
+☑ Chicken Curry
+☑ Pilau
+☑ Fish Fillet
+Accompaniments
+Required: 3
+☑ Rice
+☑ Chapati
+☑ Ugali
+☑ Vegetables
+Drinks
+Required: 1
+☑ Soda
+☑ Fresh Juice
+☑ Water
+Desserts
+Required: 1
+☑ Fruit Salad
+☑ Cake
+☑ Ice Cream
+Customization Rules
+
+Allow caterers to define what customers can change.
+
+✓ Allow Guest Count Changes
+
+✓ Allow Menu Swaps
+
+✓ Allow Additional Dishes
+
+✓ Allow Additional Drinks
+
+✓ Allow Additional Desserts
+
+✓ Allow Service Add-ons
+Additional Services
+Add Service
+
+Examples:
+
+Service	Price
+Waiters	KES 5,000
+Tent	KES 15,000
+Chairs	KES 10,000
+Sound System	KES 20,000
+Dynamic Pricing Rules
+
+This is where the magic happens.
+
+Base Package Price
+
+Cost Per Guest
+
+Service Fee
+
+Delivery Fee
+
+Example:
+
+Base Price:
+KES 20,000
+
+Per Guest:
+KES 850
+
+Service Fee:
+KES 5,000
+
+Formula:
+
+Total Price =
+Base Price +
+(Guest Count × Cost Per Guest) +
+Selected Add-ons +
+Delivery Fee
+Availability
+Available Locations
+
+Booking Notice
+
+Maximum Events Per Day
+Preview Panel (Right Side)
+
+A live preview of how customers will see the package.
+
+Corporate Lunch Package
+
+Starting From:
+KES 850 / Guest
+
+Includes:
+
+✓ 2 Main Dishes
+✓ 3 Accompaniments
+✓ Drinks
+✓ Dessert
+
+Guests:
+30 - 500
+
+[ Customize Package ]
+Recommended Caterer Dashboard Structure
+Caterer Dashboard
+│
+├── Overview
+├── Packages
+│   ├── All Packages
+│   ├── Create Package
+│   └── Package Categories
+│
+├── Menu Items
+│   ├── All Items
+│   ├── Add Item
+│   └── Categories
+│
+├── Quotations
+├── Bookings
+├── Customers
+├── Staff
+├── Analytics
+└── Settings
+
+This structure scales well because caterers create menu items first, then assemble those items into packages,

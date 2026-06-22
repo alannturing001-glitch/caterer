@@ -20,6 +20,8 @@ import AdminUsers from "@/pages/admin/AdminUsers";
 import AdminCategories from "@/pages/admin/AdminCategories";
 import AdminProductForm from "@/pages/admin/AdminProductForm";
 import AdminMerchant from "@/pages/admin/AdminMerchant";
+import AdminMenuItems from "@/pages/admin/AdminMenuItems";
+import AdminMenuItemForm from "@/pages/admin/AdminMenuItemForm";
 import AdminGuard from "@/components/AdminGuard";
 
 function Router() {
@@ -48,6 +50,9 @@ function Router() {
         <Route path="/admin/products/new">{() => <AdminGuard><AdminProductForm /></AdminGuard>}</Route>
         <Route path="/admin/products/:id/edit">{({ id }: any) => <AdminGuard><AdminProductForm params={{ id }} /></AdminGuard>}</Route>
         <Route path="/admin/merchant">{() => <AdminGuard><AdminMerchant /></AdminGuard>}</Route>
+        <Route path="/admin/menu-items">{() => <AdminGuard><AdminMenuItems /></AdminGuard>}</Route>
+        <Route path="/admin/menu-items/new">{() => <AdminGuard><AdminMenuItemForm /></AdminGuard>}</Route>
+        <Route path="/admin/menu-items/:id/edit">{({ id }: any) => <AdminGuard><AdminMenuItemForm params={{ id }} /></AdminGuard>}</Route>
         <Route>
           <div className="flex flex-col items-center justify-center min-h-[60vh]">
             <h1 className="text-4xl font-bold mb-4">404</h1>
