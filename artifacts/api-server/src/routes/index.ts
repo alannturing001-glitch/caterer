@@ -1,6 +1,9 @@
 import { Router, type IRouter } from "express";
 import healthRouter from "./health";
 import adminRouter from "./admin";
+import productsRouter from "./products";
+import categoriesRouter from "./categories";
+import ordersRouter from "./orders";
 
 // Import refactored feature-based routers
 import { createPackagesRouter } from "@features/packages";
@@ -17,6 +20,11 @@ router.use(healthRouter);
 
 // Admin dashboard
 router.use(adminRouter);
+
+// Legacy routes — kept for frontend compatibility
+router.use(productsRouter);
+router.use(categoriesRouter);
+router.use(ordersRouter);
 
 // Feature-based routers
 router.use(createPackagesRouter());

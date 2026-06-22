@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { QuotationService } from "./service";
+import { AuthenticatedRequest } from "@middlewares/auth";
 
 /**
  * QuotationController handles HTTP request/response for quotations
@@ -58,6 +59,12 @@ export class QuotationController {
 
       if (isNaN(userId)) {
         res.status(400).json({ error: "Invalid user ID" });
+        return;
+      }
+
+      const caller = (req as AuthenticatedRequest).user;
+      if (!caller || (caller.id !== userId && caller.role !== "admin")) {
+        res.status(403).json({ error: "Forbidden" });
         return;
       }
 
